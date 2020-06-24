@@ -1,12 +1,18 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
+import Join from "./components/Join/Join";
+import Chat from "./components/Chat/Chat";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Real Time Chat App</h1>
+    <div className="container">
+      <Switch>
+        <Route exact path="/" component={Join} />
+        <Route exact path="/chat" component={Chat} />
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
