@@ -8,11 +8,21 @@ const router = require("./router");
 
 const app = express();
 
+const bodyParser = require("body-parser");
+const expressSession = require("express-session")({
+  secret: "secret",
+  resave: false,
+  saveUninitialized: false,
+});
+
 const server = http.createServer(app);
 const io = socketio(server);
 
 app.use(cors());
 app.use(router);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSession);
 
 io.on("connect", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
